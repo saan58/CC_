@@ -2,7 +2,7 @@
 <script>
 
     // javascript code 
-
+     
 
 </script>
 
@@ -30,7 +30,7 @@
     <!-- Drop image here or image choose  -->
     <div class="drop_image">
         <p>Drop images here <br /> or</p>
-        <button type="button" class="bn" on:click={print}>Choose Images</button>
+        <button type="button" class="bn" >Choose Images</button>
     </div>
 </center>
 

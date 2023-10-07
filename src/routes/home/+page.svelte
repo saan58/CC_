@@ -1,5 +1,12 @@
 <script>
 //java script code 
+//var slider = document.getElementById("myRange");
+//var output = document.getElementById("demo");
+//output.innerHTML = slider.value;
+
+// slider.oninput = function() {
+//   output.innerHTML = this.value;
+// }
 </script>
 
 <!-- for Heading container Box  -->
@@ -28,26 +35,126 @@
     
   </div>
   <div class="column1" style="background-color:#bbb;">
- <p>Scale images to <input> % of the original dimensions.</p>
+
+ <p class="p1">Scale images to  <input class="input1">  % of the original dimensions.</p>
+
+ 
+ 
+ <div class="row">
+  <div class="column">
+    <p class="p2">Image Format</p>
+    <form >
+      <select class="select">
+        <option value="JPEG">JPEG</option>
+        <option value="PNG">PNG</option>
+        <option value="WEBP">WEBP</option> 
+      </select>
+    </form>
 
   </div>
+   <div>
+    <p class="p3">Image Quality</p>
+    
+<div class="slidecontainer">
+  <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+  <p>Value: <span id="demo"></span></p>
+</div>
+  </div>
+ </div>
+ 
+ <p>Image Background</p>
+
+ </div>
+ 
 </div>
  
 
-  
- 
 
 <style>
+  
 
+  .slidecontainer {
+    padding-left: 200px;
+  width: 100%;
+}
+
+.slider {
+   
+  width: 100%;
+  height: 10px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 23px;
+  height: 24px;
+  border: 0;
+  background: url('contrasticon.png');
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 23px;
+  height: 24px;
+  border: 0;
+  background: url('contrasticon.png');
+  cursor: pointer;
+}
+
+
+.select{
+  height: 40px;
+  width: 300px;
+  margin-left: 50px;
+ 
+}
+
+
+  .p2{
+    
+    font-size: 30px;
+    margin-left: 50px;
+     
+
+  }
+  .p3{
+    
+    font-size: 30px;
+    padding-left: 200px;
+
+  }
+
+  .input1{
+    height: 20px;
+    width: 30px;;
+  }
+
+.p1{
+
+  font-size: 30px;
+  margin-left: 50px;
+}
  
 
 .row {
   display: flex;
+  
 }
 
 /* Create two equal columns that sits next to each other */
 .column {
- 
+  font-size: 0;
   padding: 10px;
   height: 300px; /* Should be removed. Only for demonstration */
 }

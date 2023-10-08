@@ -17,10 +17,14 @@
     </center>
   </div>
 </center>
+
 <h1 class="percentage"><u>File Size</u></h1>
 
+<!-- divide a screen row and two column  -->
 <div class="row">
+  <!-- column one  -->
   <div class="column">
+    <!-- navigation bar inside  -->
     <nav>
       <ul>
         <li class="Choose_file"><a href="./home">Percentage</a></li>
@@ -29,10 +33,14 @@
         <li class="Choose_file"><a href="./width">Width</a></li>
         <li class="Choose_file"><a href="./height">Height</a></li>
         <li class="Choose_file"><a href="./longest">Longest Side</a></li>
-        <div class = "row">
+
+        <!-- Delete and Back button box  -->
+        <div class = "row"> 
+          <!-- back button  -->
           <div class="column2">
             <li class="Choose_file1"><a href="./longest">Back</a></li>
           </div>
+          <!--Delete button  -->
           <div class ="column2">
             <li class="Choose_file1"><a href="./longest">Delete</a></li>
 
@@ -41,14 +49,31 @@
       </ul>
     </nav>
   </div>
+
+  <!-- coloumn two in operational part  -->
   <div class="column1">
-    <p class="p1">
-      Scale images to <input class="input1" /> % of the original dimensions.
-    </p>
+    <div>
+     
+      <p class="p4">Images will be resized to 97.7 kB or less.</p>
+
+      <div class="slidecontainerfilesize">
+        
+        <input
+          type="range"
+          min="1"
+          max="100"
+          value="50"
+          class="slider"
+          id="myRange"
+        />
+        <p>Value: <span id="demo" /></p>
+      </div>
+    </div>
 
     <div class="row">
       <div class="column">
         <p class="p2">Image Format</p>
+        <!-- select image formate  -->
         <form>
           <select class="select">
             <option value="JPEG">JPEG</option>
@@ -88,6 +113,8 @@
 
 <style>
   /* choose button style */
+
+  /* start button style  */
   .bn {
     height: 20%;
     width: 80%;
@@ -109,8 +136,14 @@
     transition: 400ms;
   }
 
+  /* range slider style */
   .slidecontainer {
     padding-left: 200px;
+    width: 100%;
+  }
+
+  .slidecontainerfilesize {
+    padding-left: 50px;
     width: 100%;
   }
 
@@ -147,6 +180,8 @@
     cursor: pointer;
   }
 
+  /* image formate style  */
+  
   .select {
     height: 40px;
     width: 300px;
@@ -161,7 +196,11 @@
     font-size: 30px;
     padding-left: 200px;
   }
+  .p4{
+    margin-left: 50px;
+  }
 
+  /* input box style */
   .input1 {
     height: 20px;
     width: 30px;
@@ -216,6 +255,7 @@
     padding-left: 300px;
   }
 
+  /* menue bar style */
 
   .Choose_file1 {
     height: 50px;

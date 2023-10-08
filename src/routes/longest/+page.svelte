@@ -43,7 +43,7 @@
   </div>
   <div class="column1">
     <p class="p1">
-      Scale images to <input class="input1" /> % of the original dimensions.
+      Make the longest side of images  <input class="input1" /> pixels..
     </p>
 
     <div class="row">
@@ -163,8 +163,8 @@
   }
 
   .input1 {
-    height: 20px;
-    width: 30px;
+    height: 30px;
+    width: 40px;
   }
 
   .p1 {

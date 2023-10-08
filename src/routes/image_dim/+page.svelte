@@ -7,6 +7,10 @@
   // slider.oninput = function() {
   //   output.innerHTML = this.value;
   // }
+
+
+  let state1 = false;
+
 </script>
 
 <!-- for Heading container Box  -->
@@ -17,7 +21,7 @@
     </center>
   </div>
 </center>
-<h1 class="percentage"><u>Image Dimension</u></h1>
+<h1 class="imageDim"><u>Image Dimension</u></h1>
 
 <div class="row">
   <div class="column">
@@ -43,8 +47,17 @@
   </div>
   <div class="column1">
     <p class="p1">
-      Scale images to <input class="input1" /> % of the original dimensions.
-    </p>
+      
+Make images <input class="input1" /> x <input class="input1" /> (Width  ×  Height)
+  </p>
+ 
+ 
+
+    <label style="margin-left: 50px;">
+      <input  type="checkbox" bind:checked = {state1}>
+      Use padding to avoid stretching or squashing images.
+  </label>
+  
 
     <div class="row">
       <div class="column">
@@ -163,12 +176,12 @@
   }
 
   .input1 {
-    height: 20px;
-    width: 30px;
+    height: 30px;
+    width: 40px;
   }
 
   .p1 {
-    font-size: 30px;
+    font-size: 20px;
     margin-left: 50px;
   }
 
@@ -212,7 +225,7 @@
     font-size: 20px;
   }
 
-  .percentage {
+  .imageDim {
     padding-left: 300px;
   }
 

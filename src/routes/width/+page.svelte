@@ -8,6 +8,8 @@
   //   output.innerHTML = this.value;
   // }
 </script>
+<!-- for use backgroud color -->
+ 
 
 <!-- for Heading container Box  -->
 <center>
@@ -23,7 +25,7 @@
   <div class="column">
     <nav>
       <ul>
-        <li class="Choose_file"><a href="./home">Percentage</a></li>
+        <li class="Choose_file"><a href="./percentage">Percentage</a></li>
         <li class="Choose_file"><a href="./file_size">File Size</a></li>
         <li class="Choose_file"><a href="./image_dim">Image Dimensions</a></li>
         <li class="Choose_file"><a href="./width">Width</a></li>
@@ -301,4 +303,8 @@
   li a:hover {
     color: white;
   }
+
+
+
+  
 </style>

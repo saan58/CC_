@@ -17,10 +17,13 @@
     </center>
   </div>
 </center>
+
+<!-- Name of page  -->
 <h1 class="percentage"><u>Percentage</u></h1>
 
 <div class="row">
   <div class="column">
+    <!-- Navigation bar for controlling all page  -->
     <nav>
       <ul>
         <li class="Choose_file"><a href="./percentage">Percentage</a></li>
@@ -29,6 +32,7 @@
         <li class="Choose_file"><a href="./width">Width</a></li>
         <li class="Choose_file"><a href="./height">Height</a></li>
         <li class="Choose_file"><a href="./longest">Longest Side</a></li>
+        
         <div class = "row">
           <div class="column2">
             <li class="Choose_file1"><a href="./longest">Back</a></li>

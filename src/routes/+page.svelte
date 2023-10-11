@@ -2,59 +2,12 @@
 
     <script>
 
-        //     // javascript code 
-          
-        // function openFileDialog() {
-        //       const input = document.createElement("input");
-        //       input.type = "file";
-        //       input.click();
-          
-        //       input.addEventListener("change", (event) => {
-        //         const selectedFile = event.target.files[0];
-        //         // You can now work with the selected file
-        //         console.log("Selected file: ", selectedFile);
-        //       });
-        //     }
-
-
-        let currentImageIndex=0; // To track the currently displayed image index
-
-    // Function to display the selected images
-    function displaySelectedImages(input){
-        const selectedImagesContainer=document.getElementById('selectedImages');
-        selectedImagesContainer.innerHTML=''; // Clear previous selections
-
-        if (input.files && input.files.length > 0) {
-            for (let i = 0; i < input.files.length; i++) {
-                const reader=new FileReader();
-                reader.onload=function(e) {
-                    const img=document.createElement('img');
-                    img.src=e.target.result;
-                    img.classList.add('selected-image');
-                    selectedImagesContainer.appendChild(img);
-                };
-                reader.readAsDataURL(input.files[i]);
-            }
-            // Show the "Next" button when images are selected
-            document.getElementById('nextButton').style.display='block';
-        }
-    }
-
-    // Function to display the next image
-    function nextImage() {
-        const images=document.querySelectorAll('.selected-image');
-        if (currentImageIndex < images.length-1) {
-            images[currentImageIndex].style.display='none';
-            currentImageIndex++;
-            images[currentImageIndex].style.display='block';
-        }
-    }
-             
-        
+import Counter from './Counter.svelte';
+               
         </script>
         
         <!-- ================================================= -->
-        
+      
         <!-- for Heading container Box  -->
         <center>
             <div class="Heading_container">
@@ -73,22 +26,19 @@
                 <p>Drop images here <br /> or</p>
                  <!-- <button  class="bn"  on:click={openFileDialog}>Choose Images</button> -->
 
- <!-- Input element for selecting multiple images -->
- <input type="file"  id="imageInput" accept="image/*" multipleonchange="displaySelectedImages(this)">
-    
- <!-- Button to trigger image selection -->
- <label id="chooseImageButton" for="imageInput">Choose Images</label>
-          
- <!-- Display the selected images -->
- <div id="selectedImages"></div>
-
- <!-- Next button -->
- <button id="nextButton" onclick="nextImage()">Next</button>
-                
-        
+     
+ 
+                 <section>
+                    <h1>
+                        Choose an Image <br />to resize
+                    </h1>
+                    <Counter />
+                </section>
+ 
+              
+ 
+                 
             </div> 
-            
-         
         </center>
         
         
@@ -122,6 +72,19 @@
     <title>File Choose </title>
  </head>
   <style>
+
+
+section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex: 0.6;
+    }
+    h1 {
+        width: 100%;
+    }
+
         /* heading Style */
         .Heading_container {
             /* border: 2px solid red; */

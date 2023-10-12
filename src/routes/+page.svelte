@@ -1,8 +1,8 @@
- <body>
+  
 
     <script>
 
-import Counter from './Counter.svelte';
+        import Counter from './Counter.svelte';
                
         </script>
         
@@ -24,47 +24,18 @@ import Counter from './Counter.svelte';
             <!-- Drop image here or image choose  -->
             <div class="drop_image" >
                 <p>Drop images here <br /> or</p>
-                 <!-- <button  class="bn"  on:click={openFileDialog}>Choose Images</button> -->
+                
 
-     
- 
                  <section>
-                    <h1>
-                        Choose an Image <br />to resize
-                    </h1>
+                     
                     <Counter />
                 </section>
- 
-              
- 
-                 
+   
             </div> 
         </center>
         
         
-        <!-- for show a some features in website -->
-        <div class="horizontal">
-            <div>Super-fast</div>
-            <div>100% free</div>
-            <div>Batch processing</div>
-            <div>Works in your web browser</div>
-        </div>
-        
-        <div class="horizontal1">
-            <div>Easy to use</div>
-            <div>No sign-up</div>
-            <div>Private - no uploading</div>
-            <div>Compress Images</div>
-        </div>
-        
-        <div class="horizontal2">
-            <div>Reduce file size of images</div>
-        </div>
-
-
-
-
- </body>
+    
 
 <!-- CSS style section -->
 
@@ -79,6 +50,8 @@ section {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
         flex: 0.6;
     }
     h1 {
@@ -108,7 +81,7 @@ section {
         /* drop image container style */
         .drop_image {
             pointer-events: auto;
-            height: 200px;
+            height: 500px;
             width: 1200px;
             background-color: #aebdca;
             border-radius: 8px;

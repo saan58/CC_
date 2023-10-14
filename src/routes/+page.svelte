@@ -25,7 +25,6 @@
             <div class="drop_image" >
                 <p>Drop images here <br /> or</p>
                 
-
                  <section>
                      
                     <Counter />
@@ -115,61 +114,9 @@ section {
             transition: 400ms;
         }
     
-        /* website features style */
-        .horizontal div {
-            display: inline-block;
-            padding-top: 7%;
-            padding-left: 12%;
-        }
-        .horizontal1 div {
-            display: inline-block;
-            padding-top: 3%;
-            padding-left: 12%;
-        }
-        .horizontal2 div {
-            display: inline-block;
-            padding-top: 3%;
-            padding-left: 12%;
-        }  
+    
 
-
-
-
-        /* CSS styles for the button and selected image display */
-    #chooseImageButton {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        cursor: pointer;
-    }
-
-    #imageInput {
-        display: none;
-    }
-
-    #selectedImages {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .selected-image {
-        max-width: 100px;
-        max-height: 100px;
-    }
-
-    #nextButton {
-        display: none;
-        margin-top: 10px;
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        cursor: pointer;
-    }
-
-
-       
+  
        
     </style>
 

@@ -5,8 +5,9 @@
         #chooseImageButton {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #007BFF;
+            background-color:  #181717;
             color: #fff;
+            border-radius: 5px;
             cursor: pointer;
         }
         #imageInput {
@@ -23,10 +24,11 @@
         }
         #nextButton {
             display: none;
-            margin-top: 10px;
+            margin-top: 50px;
             padding: 10px 20px;
-            background-color: #007BFF;
+            background-color:  #181717;
             color: #fff;
+            border-radius: 5px;
             cursor: pointer;
         }
     </style>

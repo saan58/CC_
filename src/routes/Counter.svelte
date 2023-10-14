@@ -30,6 +30,7 @@
             color: #fff;
             border-radius: 5px;
             cursor: pointer;
+
         }
     </style>
 </head>
@@ -65,11 +66,13 @@
         }
         // Function to display the next image
         function nextImage() {
+            window.open("http://localhost:5173/width");
             const images = document.querySelectorAll('.selected-image');
             if (currentImageIndex < images.length - 1) {
                 images[currentImageIndex].style.display = 'none';
                 currentImageIndex++;
                 images[currentImageIndex].style.display = 'block';
+                 
             }
         }
     </script>

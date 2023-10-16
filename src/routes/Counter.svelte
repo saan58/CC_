@@ -44,6 +44,8 @@
     <!-- Next button -->
     <button id="nextButton" onclick="nextImage()">Next</button>
     <script>
+
+
         let currentImageIndex = 0; // To track the currently displayed image index
         // Function to display the selected images
         function displaySelectedImages(input) {
@@ -66,12 +68,23 @@
         }
         // Function to display the next image
         function nextImage() {
-            window.open("http://localhost:5173/width");
+          //  window.open("http://localhost:5173/width");
             const images = document.querySelectorAll('.selected-image');
             if (currentImageIndex < images.length - 1) {
                 images[currentImageIndex].style.display = 'none';
+                const currentImageDataURL = images[currentImageIndex].src;
                 currentImageIndex++;
                 images[currentImageIndex].style.display = 'block';
+
+            
+        
+ 
+        
+        // Construct the URL for the next page with the image data as a query parameter
+        const nextPageURL = "http://localhost:5173/width?image=" + encodeURIComponent(currentImageDataURL);
+
+        // Open the next page in a new window
+        window.open(nextPageURL);
                  
             }
         }

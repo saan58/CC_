@@ -1,61 +1,86 @@
-<body> 
+ 
 <script>
    
-//    const url = localStorage.getItem('image');
-// // Get data URL from localStorage
+   let selectedImage;
+  let resizedImage;
+  let file;
 
-// const  img = new Image();
-// console.log(url);
-// img.src = url;
-// img.width = 200; // Set the desired width
-// img.height = 150; // Set the desired height
-// console.log(img);
-// document.body.appendChild(img);
-showResult();
-  function showResult() {
-  
-  const inputEl = document.getElementById('file-input-element');
-  
-  inputEl.addEventListener('change' , () => {
-  
-      const file = inputEl.files[0]; 
-      const fr = new FileReader();
-      fr.readAsDataURL(file);
-  
-      fr.addEventListener('load', () => {
-  
-          const url = fr.result
+  let resizeWidth  = 500;
+  let imageQuality = 70;
+  let isvlue = false;
+ 
 
-          localStorage.setItem('image', url);
-          const img = new Image();
-          img.src = url;
-           img.width = 100; // Set the desired width
-            img.height = 100; // Set the desired height
-          console.log(img);
-          console.log(url);
+  let selectedFormat = "jpeg"; // Initialize the selected option variable
+  
+  const formats = ["jpeg", "png", "webp"];
 
-         // document.getElementById('output').append(fr.result);
-          document.getElementById('output').appendChild(img);
+  function handleChange(event) {
+      selectedFormat = event.target.value;
+    } 
 
+
+  const handleImageSelect = (event) => {
+    
+     file = event.target.files[0];
+    selectedImage = URL.createObjectURL(file);
+  };
+
+  const resizeImage = async () => {
+    isvlue = true;
+  
+    if (file) {
+      console.log("file res");
+      const reader = new FileReader();
+      reader.onload = () => {
+        const img = new Image();
+        img.src = reader.result;
+        img.onload = () => {
+          console.log(img.width);
+          console.log(img.height);
       
-  
-      })
-  
-  })
-  
-  }
-  
+          console.log(resizeWidth );
+          const scaleFactor = resizeWidth / img.width;
+          console.log(scaleFactor);
+          const canvas = document.createElement('canvas');
+          canvas.width = resizeWidth;
+          canvas.height = img.height * scaleFactor;
+
+          console.log(canvas.width);
+          console.log(canvas.height);
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          console.log("imahequ"+imageQuality);
+          const resizedImage = canvas.toDataURL('image/jpeg', imageQuality / 100);
+          console.log(resizedImage);
+          selectedImage = resizedImage;
         
+        };
+      };
+      reader.readAsDataURL(file);
+    }
+  
+   //console.log(selectedImage);
+    // Send selectedImage to the backend for resizing
+    // Receive the resized image URL from the backend
+    // Set resizedImage to the URL of the resized image
+  };
+
+  const downloadImage = () => {
+    const a = document.createElement('a');
+    a.href = selectedImage;
+    a.download = 'resized_image.'+selectedFormat; // You can customize the filename here
+    a.style.display = 'none';
  
- 
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+  
 
 </script>
-</body>
-
-<!-- for use backgroud color -->
-<input type="file" id="file-input-element"  accept="image/*">
  
-<div id="output"></div>
+<input type="file" accept="image/*" on:change={handleImageSelect} />
+ 
  
 
 <!-- for Heading container Box  -->
@@ -92,35 +117,27 @@ showResult();
   </div>
   <div class="column1">
     <p class="p1">
-      Make the width of images <input class="input1" />  pixels.
+      Make the width of images <input class="input1" type="number" bind:value={resizeWidth } min="1"  />  pixels.
     </p>
 
     <div class="row">
       <div class="column">
         <p class="p2">Image Format</p>
-        <form>
-          <select class="select">
-            <option value="JPEG">JPEG</option>
-            <option value="PNG">PNG</option>
-            <option value="WEBP">WEBP</option>
-          </select>
-        </form>
+        <select  class="select" bind:value={selectedFormat} on:change={handleChange}>
+          {#each formats as format}
+            <option value={format}>{format}</option>
+          {/each}
+        </select>
       </div>
+      {#if selectedFormat !== 'png'}
       <div>
-        <p class="p3">Image Quality</p>
-
-        <div class="slidecontainer">
-          <input
-            type="range"
-            min="1"
-            max="100"
-            value="50"
-            class="slider"
-            id="myRange"
-          />
-          <p>Value: <span id="demo" /></p>
-        </div>
-      </div>
+       <p class="p3">Image Quality</p>
+         <div class="slidecontainer"> 
+       <input    class="slider" type="range" bind:value={imageQuality} min="1" max="100" step="1" />
+       <span>{imageQuality}%</span>
+     </div> 
+     </div>
+     {/if}
     </div>
 
     <p class="p2">Image Background</p>
@@ -131,9 +148,20 @@ showResult();
   </div>
 </div>
 
-<center>
-  <button type="button" class="bn">Start</button>
+{#if selectedImage}
+<center> 
+<!-- <img   src={selectedImage} alt="Selected Image" /> -->
+<button type="button" class="bn" on:click={resizeImage}>Start</button>
 </center>
+{/if}
+
+{#if isvlue }
+<center> 
+<a href={resizedImage} download="resized_image.jpg">
+  <button type="button" class="bn" on:click={downloadImage}>Download</button>
+</a>
+</center>
+{/if}
 
 <style>
   /* choose button style */
@@ -200,6 +228,8 @@ showResult();
     height: 40px;
     width: 300px;
     margin-left: 50px;
+    
+    font-size: 20px;
   }
 
   .p2 {
@@ -212,8 +242,8 @@ showResult();
   }
 
   .input1 {
-    height: 30px;
-    width: 40px;
+    height: 23px;
+    width: 50px;
   }
 
   .p1 {

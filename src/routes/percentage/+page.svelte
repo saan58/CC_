@@ -144,8 +144,7 @@ let selectedImage;
           <div class="slidecontainer"> 
         <input    class="slider" type="range" bind:value={imageQuality} min="1" max="100" step="1" />
         <span>{imageQuality}%</span>
-      </div>
-         
+      </div> 
       </div>
       {/if}
     </div>

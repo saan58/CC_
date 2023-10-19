@@ -1,14 +1,92 @@
+ 
+
 <script>
-  //java script code
-  //var slider = document.getElementById("myRange");
-  //var output = document.getElementById("demo");
-  //output.innerHTML = slider.value;
 
-  // slider.oninput = function() {
-  //   output.innerHTML = this.value;
-  // }
+let selectedImage;
+  let resizedImage;
+  let file;
+
+  let resizePercentage = 50;
+  let imageQuality = 70;
+  let isvlue = false;
+ 
+
+  let selectedFormat = "jpeg"; // Initialize the selected option variable
+  
+  const formats = ["jpeg", "png", "webp"];
+
+  function handleChange(event) {
+      selectedFormat = event.target.value;
+    } 
+
+  
+
+
+  const handleImageSelect = (event) => {
+    
+     file = event.target.files[0];
+    selectedImage = URL.createObjectURL(file);
+  };
+
+  const resizeImage = async () => {
+    isvlue = true;
+  
+    if (file) {
+      console.log("file res");
+      const reader = new FileReader();
+      reader.onload = () => {
+        const img = new Image();
+        img.src = reader.result;
+        img.onload = () => {
+          console.log(img.width);
+          console.log(img.height);
+      
+          console.log(resizePercentage);
+          const scaleFactor = resizePercentage / 100;
+          console.log(scaleFactor);
+          const canvas = document.createElement('canvas');
+          canvas.width = img.width * scaleFactor;
+          canvas.height = img.height * scaleFactor;
+
+          console.log(canvas.width);
+          console.log(canvas.height);
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          console.log("imahequ"+imageQuality);
+          const resizedImage = canvas.toDataURL('image/jpeg', imageQuality / 100);
+          console.log(resizedImage);
+          selectedImage = resizedImage;
+        
+        };
+      };
+      reader.readAsDataURL(file);
+    }
+  
+   //console.log(selectedImage);
+    // Send selectedImage to the backend for resizing
+    // Receive the resized image URL from the backend
+    // Set resizedImage to the URL of the resized image
+  };
+
+  const downloadImage = () => {
+    const a = document.createElement('a');
+    a.href = selectedImage;
+    a.download = 'resized_image.'+selectedFormat; // You can customize the filename here
+    a.style.display = 'none';
+ 
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+  
+        
 </script>
+ 
 
+ 
+<input type="file" accept="image/*" on:change={handleImageSelect} />
+ 
+<div id="output"></div>
 <!-- for Heading container Box  -->
 <center>
   <div class="Heading_container">
@@ -47,35 +125,29 @@
   </div>
   <div class="column1">
     <p class="p1">
-      Scale images to <input class="input1" /> % of the original dimensions.
+      Scale images to <input class="input1" type="number" bind:value={resizePercentage} min="1" max="100" /> % of the original dimensions.
     </p>
 
     <div class="row">
       <div class="column">
         <p class="p2">Image Format</p>
-        <form>
-          <select class="select">
-            <option value="JPEG">JPEG</option>
-            <option value="PNG">PNG</option>
-            <option value="WEBP">WEBP</option>
-          </select>
-        </form>
+          <select  class="select" bind:value={selectedFormat} on:change={handleChange}>
+    {#each formats as format}
+      <option value={format}>{format}</option>
+    {/each}
+  </select>
       </div>
-      <div>
-        <p class="p3">Image Quality</p>
 
-        <div class="slidecontainer">
-          <input
-            type="range"
-            min="1"
-            max="100"
-            value="50"
-            class="slider"
-            id="myRange"
-          />
-          <p>Value: <span id="demo" /></p>
-        </div>
+      {#if selectedFormat !== 'png'}
+       <div>
+        <p class="p3">Image Quality</p>
+          <div class="slidecontainer"> 
+        <input    class="slider" type="range" bind:value={imageQuality} min="1" max="100" step="1" />
+        <span>{imageQuality}%</span>
       </div>
+         
+      </div>
+      {/if}
     </div>
 
     <p class="p2">Image Background</p>
@@ -86,9 +158,24 @@
   </div>
 </div>
 
-<center>
-  <button type="button" class="bn">Start</button>
+ 
+{#if selectedImage}
+<center> 
+<!-- <img   src={selectedImage} alt="Selected Image" /> -->
+<button type="button" class="bn" on:click={resizeImage}>Start</button>
 </center>
+{/if}
+
+{#if isvlue }
+<center> 
+<a href={resizedImage} download="resized_image.jpg">
+  <button type="button" class="bn" on:click={downloadImage}>Download</button>
+</a>
+</center>
+{/if}
+
+
+
 
 <style>
   /* choose button style */
@@ -98,7 +185,7 @@
     font-size: 20px;
     color: white;
     font-weight: 700;
-    margin-top: 50px;
+    margin-top: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -113,8 +200,9 @@
     transition: 400ms;
   }
 
+   
   .slidecontainer {
-    padding-left: 200px;
+    padding-left: 70px;
     width: 100%;
   }
 
@@ -155,6 +243,7 @@
     height: 40px;
     width: 300px;
     margin-left: 50px;
+    font-size: 20px;
   }
 
   .p2 {
@@ -163,12 +252,12 @@
   }
   .p3 {
     font-size: 30px;
-    padding-left: 200px;
+    padding-left: 70px;
   }
 
   .input1 {
-    height: 20px;
-    width: 30px;
+    height: 23px;
+    width: 50px;
   }
 
   .p1 {

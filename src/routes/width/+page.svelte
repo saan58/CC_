@@ -1,14 +1,61 @@
+<body> 
 <script>
-  //java script code
-  //var slider = document.getElementById("myRange");
-  //var output = document.getElementById("demo");
-  //output.innerHTML = slider.value;
+   
+//    const url = localStorage.getItem('image');
+// // Get data URL from localStorage
 
-  // slider.oninput = function() {
-  //   output.innerHTML = this.value;
-  // }
+// const  img = new Image();
+// console.log(url);
+// img.src = url;
+// img.width = 200; // Set the desired width
+// img.height = 150; // Set the desired height
+// console.log(img);
+// document.body.appendChild(img);
+showResult();
+  function showResult() {
+  
+  const inputEl = document.getElementById('file-input-element');
+  
+  inputEl.addEventListener('change' , () => {
+  
+      const file = inputEl.files[0]; 
+      const fr = new FileReader();
+      fr.readAsDataURL(file);
+  
+      fr.addEventListener('load', () => {
+  
+          const url = fr.result
+
+          localStorage.setItem('image', url);
+          const img = new Image();
+          img.src = url;
+           img.width = 100; // Set the desired width
+            img.height = 100; // Set the desired height
+          console.log(img);
+          console.log(url);
+
+         // document.getElementById('output').append(fr.result);
+          document.getElementById('output').appendChild(img);
+
+      
+  
+      })
+  
+  })
+  
+  }
+  
+        
+ 
+ 
+
 </script>
+</body>
+
 <!-- for use backgroud color -->
+<input type="file" id="file-input-element"  accept="image/*">
+ 
+<div id="output"></div>
  
 
 <!-- for Heading container Box  -->

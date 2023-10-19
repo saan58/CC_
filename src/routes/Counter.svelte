@@ -45,8 +45,13 @@
     <button id="nextButton" onclick="nextImage()">Next</button>
     <script>
 
+// let imageInput; 
+           
+ 
+ 
 
-        let currentImageIndex = 0; // To track the currently displayed image index
+        let currentImageIndex = 0;
+    // To track the currently displayed image index
         // Function to display the selected images
         function displaySelectedImages(input) {
             const selectedImagesContainer = document.getElementById('selectedImages');
@@ -76,13 +81,11 @@
                 currentImageIndex++;
                 images[currentImageIndex].style.display = 'block';
 
-            
-        
- 
+                localStorage.setItem("key", imageInput);
         
         // Construct the URL for the next page with the image data as a query parameter
-        const nextPageURL = "http://localhost:5173/width?image=" + encodeURIComponent(currentImageDataURL);
-
+       // const nextPageURL = "http://localhost:5173/width?image=" + encodeURIComponent(currentImageDataURL);
+        const nextPageURL = "http://localhost:5173/width";
         // Open the next page in a new window
         window.open(nextPageURL);
                  

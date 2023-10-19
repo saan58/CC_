@@ -2,6 +2,7 @@
 
     <script>
 
+
         import Counter from './Counter.svelte';
         
                
@@ -28,7 +29,7 @@
                 
                  <section>
                      
-                    <Counter />
+                    <Counter/>
                 </section>
    
             </div> 

@@ -28,7 +28,7 @@ let selectedImage;
     selectedImage = URL.createObjectURL(file);
   };
 
-  const resizeImage = async () => {
+  const  percentaFunction = async () => {
     isvlue = true;
   
     if (file) {
@@ -129,14 +129,14 @@ let selectedImage;
     </p>
 
     <div class="row">
-      <div class="column">
+         <div class="column">
         <p class="p2">Image Format</p>
-          <select  class="select" bind:value={selectedFormat} on:change={handleChange}>
-    {#each formats as format}
-      <option value={format}>{format}</option>
-    {/each}
-  </select>
-      </div>
+                  <select  class="select" bind:value={selectedFormat} on:change={handleChange}>
+            {#each formats as format}
+              <option value={format}>{format}</option>
+            {/each}
+          </select>                       
+        </div>
 
       {#if selectedFormat !== 'png'}
        <div>
@@ -161,7 +161,7 @@ let selectedImage;
 {#if selectedImage}
 <center> 
 <!-- <img   src={selectedImage} alt="Selected Image" /> -->
-<button type="button" class="bn" on:click={resizeImage}>Start</button>
+<button type="button" class="bn" on:click={ percentaFunction}>Start</button>
 </center>
 {/if}
 

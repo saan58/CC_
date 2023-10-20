@@ -25,7 +25,7 @@
    selectedImage = URL.createObjectURL(file);
  };
 
- const resizeImage = async () => {
+ const widthFunction = async () => {
    isvlue = true;
  
    if (file) {
@@ -115,6 +115,8 @@
      </ul>
    </nav>
  </div>
+
+ 
  <div class="column1">
    <p class="p1">
      Make the width of images <input class="input1" type="number" bind:value={resizeWidth } min="1"  />  pixels.
@@ -151,7 +153,7 @@
 {#if selectedImage}
 <center> 
 <!-- <img   src={selectedImage} alt="Selected Image" /> -->
-<button type="button" class="bn" on:click={resizeImage}>Start</button>
+<button type="button" class="bn" on:click={widthFunction}>Start</button>
 </center>
 {/if}
 

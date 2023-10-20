@@ -28,7 +28,7 @@
    selectedImage = URL.createObjectURL(file);
  };
 
- const resizeImage = async () => {
+ const  imageDimFunctioin = async () => {
    isvlue = true;
  
    if (file) {
@@ -67,6 +67,9 @@
    // Receive the resized image URL from the backend
    // Set resizedImage to the URL of the resized image
  };
+
+
+
 
  const downloadImage = () => {
    const a = document.createElement('a');
@@ -119,7 +122,8 @@
      </ul>
    </nav>
  </div>
- <div class="column1">
+
+  <div class="column1">
    <p class="p1">
     Make images <input class="input1" type="number" bind:value={resizeDimensionsWidth } min="1"  /> x <input class="input1" type="number" bind:value={resizeDimensionsHeight } min="1"  /> (Width  ×  Height)
    </p>
@@ -155,12 +159,13 @@
      <label for="favcolor" style="font-size: 20px;">color</label>
    </form>
  </div>
+ 
 </div>
 
 {#if selectedImage}
 <center> 
 <!-- <img   src={selectedImage} alt="Selected Image" /> -->
-<button type="button" class="bn" on:click={resizeImage}>Start</button>
+<button type="button" class="bn" on:click={ imageDimFunctioin}>Start</button>
 </center>
 {/if}
 

@@ -25,7 +25,7 @@
    selectedImage = URL.createObjectURL(file);
  };
 
- const resizeImage = async () => {
+ const heightFunction = async () => {
    isvlue = true;
  
    if (file) {
@@ -151,7 +151,7 @@
 {#if selectedImage}
 <center> 
 <!-- <img   src={selectedImage} alt="Selected Image" /> -->
-<button type="button" class="bn" on:click={resizeImage}>Start</button>
+<button type="button" class="bn" on:click={heightFunction}>Start</button>
 </center>
 {/if}
 
@@ -162,6 +162,10 @@
 </a>
 </center>
 {/if}
+
+
+
+
 
 <style>
  /* choose button style */

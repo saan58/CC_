@@ -9,6 +9,7 @@ let selectedImage;
   let resizePercentage = 50;
   let imageQuality = 70;
   let isvlue = false;
+  let fileSize;
  
 
   let selectedFormat = "jpeg"; // Initialize the selected option variable
@@ -22,11 +23,15 @@ let selectedImage;
   
 
 
-  const handleImageSelect = (event) => {
-    
-     file = event.target.files[0];
-    selectedImage = URL.createObjectURL(file);
-  };
+    const handleImageSelect = (event) => {
+  const files = event.target.files;
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    const imageUrl = URL.createObjectURL(file);
+    // You can do something with each 'file' and 'imageUrl', such as displaying them or processing them.
+  }
+};
+
 
   const  percentaFunction = async () => {
     isvlue = true;
@@ -84,7 +89,7 @@ let selectedImage;
  
 
  
-<input type="file" accept="image/*" on:change={handleImageSelect} />
+<input type="file" accept="image/*" multiple on:change={handleImageSelect} />
  
 <div id="output"></div>
 <!-- for Heading container Box  -->

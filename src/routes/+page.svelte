@@ -1,6 +1,6 @@
 <script>
   // import Counter from './Counter.svelte';
-  let activeDiv = "div1";
+  let activeDiv = "Percentage";
   let selectedImage;
   let file;
   let imageSelected = true;
@@ -16,6 +16,8 @@
   let resizeDimensionsHeight = 500;
   let state1 = false;
   let isDownload = false;
+  let fileSizeKbBefor ;
+  let fileSizeKbAfter ;
   const formats = ["jpeg", "png", "webp"];
 
   //====================
@@ -30,6 +32,9 @@
 
     file = event.target.files[0];
     selectedImage = URL.createObjectURL(file);
+    fileSizeKbBefor = file.size / 1024;
+  
+    
   };
 
   //======= Function to switch the active div================
@@ -40,11 +45,14 @@
 
   const percentaFunction = async () => {
     isDownload = true;
+    isvlue = false;
+  
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
         const img = new Image();
         img.src = reader.result;
+      
         img.onload = () => {
           const scaleFactor = resizePercentage / 100;
           const canvas = document.createElement("canvas");
@@ -57,9 +65,14 @@
             imageQuality / 100
           );
           selectedImage = resizedImage;
+    
+         
+         
+          
         };
       };
       reader.readAsDataURL(file);
+      downloadImage();
     }
 
     //console.log(selectedImage);
@@ -72,6 +85,7 @@
 
   const imageDimFunctioin = async () => {
     isDownload = true;
+    isvlue = false;
 
     if (file) {
       console.log("file res");
@@ -103,6 +117,7 @@
         };
       };
       reader.readAsDataURL(file);
+      downloadImage();
     }
 
     //console.log(selectedImage);
@@ -115,6 +130,7 @@
 
   const widthFunction = async () => {
     isDownload = true;
+    isvlue = false;
 
     if (file) {
     
@@ -139,6 +155,7 @@
         };
       };
       reader.readAsDataURL(file);
+      downloadImage();
     }
 
     //console.log(selectedImage);
@@ -151,6 +168,7 @@
 
   const heightFunction = async () => {
     isDownload = true;
+    isvlue = false;
 
     if (file) {
       const reader = new FileReader();
@@ -173,6 +191,7 @@
         };
       };
       reader.readAsDataURL(file);
+      downloadImage();
     }
 
     //console.log(selectedImage);
@@ -184,6 +203,7 @@
   // ===========longest Side function ===========
   const longSideFunction = async () => {
     isDownload = true;
+    isvlue = false;
 
     if (file) {
       const reader = new FileReader();
@@ -214,6 +234,8 @@
         };
       };
       reader.readAsDataURL(file);
+
+      downloadImage();
     }
 
     //console.log(selectedImage);
@@ -223,7 +245,7 @@
   };
 
   const downloadImage = () => {
-    isDownload = false;
+ 
     const a = document.createElement("a");
     a.href = selectedImage;
     a.download = "resized_image." + selectedFormat; // You can customize the filename here
@@ -238,6 +260,11 @@
     imageSelected = true;
     isvlue = false;
   };
+
+  const BackPage =()=>{
+    isvlue = true;
+    isDownload = false;
+  }
 
 </script>
 
@@ -260,20 +287,18 @@
       <div class="drop_image">
         <p>Drop images here <br /> or</p>
 
-        <div>
+        <div >
           <input
-            class="inputValue"
+           class=" chooseImage"
+            id="imageInput"
             type="file"
-          
             accept="image/*"
             on:change={handleImageSelect}
           />
+          <label  class="inputValue" for="imageInput">Choose Images</label>
         </div>
 
-        <!-- <section>
-                  
-                 <Counter/>
-             </section> -->
+   
       </div>
     </center>
   </div>
@@ -294,22 +319,22 @@
       <!-- Navigation bar for controlling all page  -->
       <nav>
         <ul>
-          <button class="Choose_file" on:click={() => switchDiv("div1")}
+          <button class="Choose_file" on:click={() => switchDiv("Percentage")}
             >Percentage</button
           ><br />
-          <button class="Choose_file" on:click={() => switchDiv("div2")}
+          <button class="Choose_file" on:click={() => switchDiv("FileSize")}
             >File Size</button
           ><br />
-          <button class="Choose_file" on:click={() => switchDiv("div3")}
+          <button class="Choose_file" on:click={() => switchDiv("ImageDimensions")}
             >Image Dimensions</button
           ><br />
-          <button class="Choose_file" on:click={() => switchDiv("div4")}
+          <button class="Choose_file" on:click={() => switchDiv("WidthDiv")}
             >Width</button
           ><br />
-          <button class="Choose_file" on:click={() => switchDiv("div5")}>
+          <button class="Choose_file" on:click={() => switchDiv("HeightDiv")}>
             Height</button
           ><br />
-          <button class="Choose_file" on:click={() => switchDiv("div6")}
+          <button class="Choose_file" on:click={() => switchDiv("LongestSide")}
             >Longest Side</button
           >
           <div class="row">
@@ -326,8 +351,9 @@
       </nav>
     </div>
 
-    {#if activeDiv == "div1"}
-      <div id="div1">
+    {#if activeDiv == "Percentage"}
+ 
+      <div id="Percentage">
         <!-- Name of page  -->
         <h1 class="percentage"><u>Percentage</u></h1>
 
@@ -389,21 +415,13 @@
             </center>
           {/if}
 
-          {#if isDownload}
-            <center>
-              <a href={resizedImage} download="resized_image.jpg">
-                <button type="button" class="bn" on:click={downloadImage}
-                  >Download</button
-                >
-              </a>
-            </center>
-          {/if}
+        
         </div>
       </div>
     {/if}
 
-    {#if activeDiv == "div2"}
-      <div id="div2">
+    {#if activeDiv == "FileSize"}
+      <div id="FileSize">
         <h1 class="percentage"><u>File Size</u></h1>
 
         <div class="column1">
@@ -455,12 +473,16 @@
             <input type="color" id="favcolor" name="favcolor" value="#ff0000" />
             <label for="favcolor" style="font-size: 20px;">color</label>
           </form>
+
+
+         
         </div>
       </div>
     {/if}
 
-    {#if activeDiv == "div3"}
-      <div id="div3">
+    {#if activeDiv == "ImageDimensions"}
+ 
+      <div id="ImageDimensions">
         <h1 class="percentage"><u> Image Dimensions</u></h1>
 
         <div class="column1">
@@ -531,21 +553,13 @@
             </center>
           {/if}
 
-          {#if isDownload}
-            <center>
-              <a href={resizedImage} download="resized_image.jpg">
-                <button type="button" class="bn" on:click={downloadImage}
-                  >Download</button
-                >
-              </a>
-            </center>
-          {/if}
+          
         </div>
       </div>
     {/if}
 
-    {#if activeDiv == "div4"}
-      <div id="div4">
+    {#if activeDiv == "WidthDiv"}
+      <div id="WidthDiv">
         <h1 class="percentage"><u>Width</u></h1>
         <div class="column1">
           <p class="p1">
@@ -603,21 +617,13 @@
             </center>
           {/if}
 
-          {#if isDownload}
-            <center>
-              <a href={resizedImage} download="resized_image.jpg">
-                <button type="button" class="bn" on:click={downloadImage}
-                  >Download</button
-                >
-              </a>
-            </center>
-          {/if}
+         
         </div>
       </div>
     {/if}
 
-    {#if activeDiv == "div5"}
-      <div id="div5">
+    {#if activeDiv == "HeightDiv"}
+      <div id="HeightDiv">
         <h1 class="percentage"><u>Height</u></h1>
 
         <div class="column1">
@@ -675,22 +681,13 @@
               >
             </center>
           {/if}
-
-          {#if isDownload}
-            <center>
-              <a href={resizedImage} download="resized_image.jpg">
-                <button type="button" class="bn" on:click={downloadImage}
-                  >Download</button
-                >
-              </a>
-            </center>
-          {/if}
+ 
         </div>
       </div>
     {/if}
 
-    {#if activeDiv == "div6"}
-      <div id="div6">
+    {#if activeDiv == "LongestSide"}
+      <div id="LongestSide">
         <h1 class="percentage"><u>Longest Side</u></h1>
 
         <div class="column1">
@@ -743,34 +740,69 @@
           {#if selectedImage}
             <center>
               <!-- <img   src={selectedImage} alt="Selected Image" /> -->
-              <button type="button" class="bn" on:click={longSideFunction}
+              <button type="button" class="bn" on:click={longSideFunction }
                 >Start</button
               >
             </center>
           {/if}
-
-          {#if isDownload}
-            <center>
-              <a href={resizedImage} download="resized_image.jpg">
-                <button type="button" class="bn" on:click={downloadImage}
-                  >Download</button
-                >
-              </a>
-            </center>
-          {/if}
+ 
         </div>
       </div>
     {/if}
+
+  
+
   </div>
 {/if}
 
+
+
+{#if isDownload}
+<center>
+  <div class="Heading_container">
+    <center>
+      <h2>Bulk Resize Images</h2>
+    </div>
+    </center>
+      
+ 
+<center>
+  <div class= "complete"> Completed</div>
+<button  type="button" class="download" on:click={downloadImage}>Download </button>
+<div class = rowdown>
+      
+        <div>
+          <div class="before">Before </div>
+          <div class = "kb">{fileSizeKbBefor.toFixed(1)} Kb</div>
+        </div>
+            
+
+   <div>
+      <div  class="after" >After</div>
+     
+   </div>
+ 
+   
+</div>
+<p  class="result">You can find the result images in the Downloads folder.</p>
+
+<button class="back" on:click={()=> BackPage()}>Back</button>
+</center>
+
+
+
+{/if}
+
+
 <!-- CSS style section -->
 
-<head>
-  <title>File Choose </title>
-</head>
+ 
 
 <style>
+
+  .chooseImage{
+    display: none;
+  }
   h1 {
     width: 100%;
   }
@@ -1036,4 +1068,103 @@
     margin-top: 90px;
     width: 200px;
   }
+
+
+
+  .complete{
+    margin-top: 100px;
+    
+    width: 1000px;
+    height: 20px;
+    color: black;
+    background-color: white;
+    align-items: center;   
+    border-radius: 50px;  
+   
+}
+
+.download{
+    height: 15%;
+    width: 20%;
+    font-size: medium;
+    color: white;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 15px;
+    gap: 15px;
+    background-color: #181717;
+    outline: 3px #181717 solid;
+    outline-offset: -3px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: 400ms;
+    margin-top: 20px;
+}
+.rowdown{
+    margin-top: 60px;
+   display: inline-flex;
+ 
+
+}
+.before{
+
+    width: 50px;
+    height: 10px;
+    background-color: azure;
+    padding: 10px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 50px;
+    margin-right: 600px;
+    margin-bottom: 5px;
+
+}
+.after{
+    width: 50px;
+    height: 10px;
+    background-color: azure;
+    padding: 10px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 50px;
+    margin-bottom: 5px;
+     
+}
+.result{
+
+    margin-top: 120px;
+}
+ .kb{
+    margin-right: 600px;
+ }
+
+ .back{
+
+  height: 25px;
+    width: 80px;
+    font-size: small;
+    color: white;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 15px;
+    gap: 15px;
+    background-color: #181717;
+    outline: 3px #181717 solid;
+    outline-offset: -3px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: 400ms;
+    margin-top: 20px;
+
+ }
 </style>

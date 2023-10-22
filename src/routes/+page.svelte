@@ -284,7 +284,7 @@
       <!-- for get a padding  -->
       <br /><br />
       {#if backFile }
-      <h2 class = "h2">Select File(1)</h2>
+      <h3 class = "h2">Select File(1)</h3>
       <div class="backshowfile">
         <p class= "fileName">{file.name}</p>
         <p class = "filekb">{fileSizeKbBefor.toFixed(1)}</p>
@@ -301,7 +301,7 @@
       <!-- Drop image here or image choose  -->
       <div class="drop_image">
         <p>Drop images here <br /> or</p>
-
+ 
         <div>
           <input
             class=" chooseImage"
@@ -320,9 +320,9 @@
 {#if isvlue}
   <!-- for Heading container Box  -->
   <center>
-    <div class="Heading_container">
+    <div class="Heading_container1">
       <center>
-        <h2>Bulk Resize Images</h2>
+        <h3>Bulk Resize Images</h3>
       </center>
     </div>
   </center>
@@ -483,7 +483,7 @@
           </div>
 
           <p class="p2">Image Background</p>
-          <form style="margin-left: 50px;">
+          <form style="margin-left: 30px;">
             <input type="color" id="favcolor" name="favcolor" value="#ff0000" />
             <label for="favcolor" style="font-size: 20px;">color</label>
           </form>
@@ -512,7 +512,7 @@
             /> (Width × Height)
           </p>
 
-          <label style="margin-left: 50px ; font-size: 21px;">
+          <label style="margin-left: 30px ; font-size: 12px;">
             <input type="checkbox" bind:checked={state1} />
             Use padding to avoid stretching or squashing images.
           </label>
@@ -798,22 +798,7 @@
     width: 100%;
   }
 
-  /* heading Style */
-  .Heading_container {
-    /* border: 2px solid red; */
-    height: 40opx;
-    width: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: flex-end;
-    background-color: #aebdca;
-    border-radius: 8px;
-
-    /* box-shadow: 0px 20px 50px grey  ; */
-    box-shadow: 0 8px 6px -6px rgb(36, 35, 35);
-    /* object-fit: ; */
-  }
+ 
   h2 {
     font-size: 30px;
   }
@@ -821,14 +806,16 @@
   /* drop image container style */
   .drop_image {
     pointer-events: auto;
-    height: 300px;
+    height: 250px;
     width: 1200px;
-    background-color: #aebdca;
+    background-color: #edf1f5;
     border-radius: 8px;
+    display: inline-table;
     box-shadow: 0 8px 6px -6px rgb(36, 35, 35);
-    align-content: flex-end;
+    align-content: center;
     justify-content: center;
     align-items: center;
+    
     font-size: 28px;
     padding-top: 1%;
   }
@@ -856,12 +843,13 @@
   }
 
   .bn {
-    height: 20%;
-    width: 80%;
+    height: 35px;
+    width: 100%;
     font-size: 20px;
+    
     color: white;
     font-weight: 700;
-    margin-top: 30px;
+    margin-top: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -878,7 +866,7 @@
 
   .slidecontainer {
     padding-left: 70px;
-    width: 100%;
+    width: 400px;
   }
 
   .slider {
@@ -916,30 +904,35 @@
 
   .select {
     height: 40px;
-    width: 300px;
-    margin-left: 50px;
-    font-size: 20px;
+    width: 150px;
+    margin-left: 30px;
+    font-size: 18px;
     border-radius: 5px;
+    margin-bottom: 20px;
   }
 
   .p2 {
-    font-size: 30px;
-    margin-left: 50px;
+    font-size: 20px;
+    margin-left: 30px;
+   margin-top: 30px;
+    
   }
   .p3 {
-    font-size: 30px;
+    font-size: 20px;
     padding-left: 70px;
+    margin-top: 30px;
   }
 
   .input1 {
     height: 23px;
-    width: 50px;
+    width: 80px;
     border-radius: 5px;
   }
 
   .p1 {
-    font-size: 30px;
-    margin-left: 50px;
+    font-size: 18px;
+    margin-left: 30px;
+    margin-top: 40px;
   }
 
   .row {
@@ -968,14 +961,31 @@
   /* heading Style */
   .Heading_container {
     /* border: 2px solid red; */
-    height: 60px;
-    width: 400px;
+    height: 50px;
+    width: 350px;
 
     display: flex;
     justify-content: center;
     align-items: center;
     align-content: flex-end;
-    background-color: #aebdca;
+    background-color: #edf1f5;
+    border-radius: 8px;
+    /* box-shadow: 0px 20px 50px grey  ; */
+    box-shadow: 0 8px 6px -6px rgb(36, 35, 35);
+    /* object-fit: ; */
+    font-size: 20px;
+  }
+   /* heading Style */
+   .Heading_container1 {
+    /* border: 2px solid red; */
+    height: 40px;
+    width:250px;
+margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: flex-end;
+    background-color: #edf1f5;
     border-radius: 8px;
     /* box-shadow: 0px 20px 50px grey  ; */
     box-shadow: 0 8px 6px -6px rgb(36, 35, 35);
@@ -984,7 +994,9 @@
   }
 
   .percentage {
-    padding-left: 300px;
+    padding-left:80px;
+    font-size: 25px;
+                        
   }
 
   .Choose_file1 {
@@ -1056,7 +1068,7 @@
   ul {
     margin: 0;
     padding: 0;
-    margin-top: 90px;
+  
     width: 200px;
   }
 
@@ -1064,9 +1076,9 @@
     margin-top: 100px;
 
     width: 1000px;
-    height: 20px;
+    height: 25px;
     color: black;
-    background-color: white;
+    background-color: rgb(38, 228, 117);
     align-items: center;
     border-radius: 50px;
   }
@@ -1096,9 +1108,9 @@
     display: inline-flex;
   }
   .before {
-    width: 50px;
-    height: 10px;
-    background-color: azure;
+    width: 80px;
+    height: 15px;
+    background-color: rgb(77, 226, 226);
     padding: 10px;
     align-items: center;
     text-align: center;
@@ -1109,9 +1121,9 @@
     margin-bottom: 5px;
   }
   .after {
-    width: 50px;
-    height: 10px;
-    background-color: azure;
+    width: 80px;
+    height: 15px;
+    background-color: rgb(77, 226, 226);
     padding: 10px;
     align-items: center;
     text-align: center;

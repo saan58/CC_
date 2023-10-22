@@ -2,9 +2,9 @@
 
 <script>
 
-let selectedImage;
-  let resizedImage;
-  let file;
+let selectedImages = [];
+  let resizedImages = [];
+  let file = [];
 
   let resizePercentage = 50;
   let imageQuality = 70;
@@ -25,9 +25,15 @@ let selectedImage;
 
     const handleImageSelect = (event) => {
   const files = event.target.files;
+  const imageList = document.getElementById("imageList");
+  imageList.innerHTML = "";
+
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
+    console.log("fille"+file[i]);
     const imageUrl = URL.createObjectURL(file);
+    console.log("image"+imageUrl);
+    selectedImages.push({ file, imageUrl });
     // You can do something with each 'file' and 'imageUrl', such as displaying them or processing them.
   }
 };
@@ -36,37 +42,40 @@ let selectedImage;
   const  percentaFunction = async () => {
     isvlue = true;
   
-    if (file) {
+     
+ 
+
       console.log("file res");
+
+      for (let i = 0; i < selectedImages.length; i++) {
+      const { file, imageUrl } = selectedImages[i];
+
       const reader = new FileReader();
       reader.onload = () => {
         const img = new Image();
         img.src = reader.result;
         img.onload = () => {
-          console.log(img.width);
-          console.log(img.height);
-      
-          console.log(resizePercentage);
+         
           const scaleFactor = resizePercentage / 100;
-          console.log(scaleFactor);
+           
           const canvas = document.createElement('canvas');
           canvas.width = img.width * scaleFactor;
           canvas.height = img.height * scaleFactor;
 
-          console.log(canvas.width);
-          console.log(canvas.height);
+          
           const ctx = canvas.getContext('2d');
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-          console.log("imahequ"+imageQuality);
+          
           const resizedImage = canvas.toDataURL('image/jpeg', imageQuality / 100);
-          console.log(resizedImage);
-          selectedImage = resizedImage;
+       
+          resizedImages.push({ file, resizedImage });
+          
         
         };
       };
       reader.readAsDataURL(file);
+   
     }
-  
    //console.log(selectedImage);
     // Send selectedImage to the backend for resizing
     // Receive the resized image URL from the backend
@@ -74,15 +83,17 @@ let selectedImage;
   };
 
   const downloadImage = () => {
-    const a = document.createElement('a');
-    a.href = selectedImage;
-    a.download = 'resized_image.'+selectedFormat; // You can customize the filename here
-    a.style.display = 'none';
- 
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  };
+   const a = document.createElement('a');
+   a.href = resizedImages;
+   console.log("mansih");
+   console.log(resizedImages);
+   a.download = 'resized_image.'+selectedFormat; // You can customize the filename here
+   a.style.display = 'none';
+
+   document.body.appendChild(a);
+   a.click();
+   document.body.removeChild(a);
+ };
   
         
 </script>
@@ -163,7 +174,7 @@ let selectedImage;
 </div>
 
  
-{#if selectedImage}
+{#if selectedImages}
 <center> 
 <!-- <img   src={selectedImage} alt="Selected Image" /> -->
 <button type="button" class="bn" on:click={ percentaFunction}>Start</button>
@@ -172,7 +183,7 @@ let selectedImage;
 
 {#if isvlue }
 <center> 
-<a href={resizedImage} download="resized_image.jpg">
+<a href={resizedImages} download="resized_image.jpg">
   <button type="button" class="bn" on:click={downloadImage}>Download</button>
 </a>
 </center>

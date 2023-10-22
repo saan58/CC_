@@ -1,49 +1,87 @@
 <script>
-  import JSZip from 'jszip';
-
   let selectedImages = [];
-  let zip = new JSZip();
+  let resizedImages = [];
+  let resizePercentage = 50;
+  let imageQuality = 70;
+ 
+  let selectedFormat = "jpeg";
+   
 
+  // Handle image selection and display
   const handleImageSelect = (event) => {
     const files = event.target.files;
+    const imageList = document.getElementById("imageList");
+    imageList.innerHTML = "";
+
     for (let i = 0; i < files.length; i++) {
-      selectedImages.push(files[i]);
+      const file = files[i];
+      const imageUrl = URL.createObjectURL(file);
+
+      // // Display the selected images
+      // const listItem = document.createElement("li");
+      // listItem.textContent = file.name;
+      // imageList.appendChild(listItem);
+
+      selectedImages.push({ file, imageUrl });
     }
   };
 
-  const createAndDownloadZipFile = async () => {
+  // Bulk image resizing function
+  const bulkResize = async () => {
+   
+    const resizedImagesContainer = document.getElementById("resizedImages");
+    resizedImagesContainer.innerHTML = "";
+
     for (let i = 0; i < selectedImages.length; i++) {
-      const file = selectedImages[i];
-      const img = new Image();
-      img.src = URL.createObjectURL(file);
+      const { file, imageUrl } = selectedImages[i];
 
-      const scaleFactor = resizePercentage / 100;
-      const canvas = document.createElement('canvas');
-      canvas.width = img.width * scaleFactor;
-      canvas.height = img.height * scaleFactor;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      const reader = new FileReader();
+      reader.onload = () => {
+        const img = new Image();
+        img.src = reader.result;
+        img.onload = () => {
+          const scaleFactor = resizePercentage / 100;
+          const canvas = document.createElement("canvas");
+          canvas.width = img.width * scaleFactor;
+          canvas.height = img.height * scaleFactor;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          const resizedImage = canvas.toDataURL(`image/${selectedFormat}`, imageQuality / 100);
 
-      const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', imageQuality / 100));
-      const fileName = `image_${i}.jpeg`;
+          // Store the resized images
+          resizedImages.push({ file, resizedImage });
 
-      zip.file(fileName, blob);
+          // Display the resized images and provide download links
+          const imgElement = document.createElement("img");
+          imgElement.src = resizedImage;
+           resizedImagesContainer.appendChild(imgElement);
+
+          const downloadLink = document.createElement("a");
+          downloadLink.href = resizedImage;
+          downloadLink.download = `resized_image_${i}.${selectedFormat}`;
+          downloadLink.textContent = "Downfdggload";
+          resizedImagesContainer.appendChild(downloadLink);
+        };
+      };
+      reader.readAsDataURL(file);
     }
-
-    zip.generateAsync({ type: 'blob' }).then((content) => {
-      const url = URL.createObjectURL(content);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'images.zip';
-      a.style.display = 'none';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    });
   };
+
+  // Rest of your code remains the same
 </script>
 
+
+<!-- Add a file input for multiple image selection -->
 <input type="file" accept="image/*" multiple on:change={handleImageSelect} />
-{#if selectedImages.length > 0}
-  <button type="button" on:click={createAndDownloadZipFile}>Download Zip</button>
-{/if}
+
+<!-- Display the list of selected images -->
+<div id="output">
+  <h3>Selected Images:</h3>
+  <ul id="imageList"></ul>
+</div>
+
+<!-- Add a button to start bulk resizing -->
+<button type="button" class="bn" on:click={bulkResize}>Bulk Resize</button>
+
+<!-- Display the resized images and provide download links -->
+<div id="resizedImages"></div>

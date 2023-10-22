@@ -13,5 +13,9 @@
 		"svelte": "^4.0.5",
 		"vite": "^4.4.2"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"jszip": "^3.10.1",
+		"pica": "^9.0.1"
+	}
 }

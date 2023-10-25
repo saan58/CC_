@@ -10,10 +10,11 @@ let selectedImages = [];
   let imageQuality = 70;
   let isvlue = false;
   let fileSize;
- 
+  let selectedFormat = "jpeg"; // Initialize the selected option variab
 
-  let selectedFormat = "jpeg"; // Initialize the selected option variable
-  
+let src = "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js";
+let srcc="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js";
+
   const formats = ["jpeg", "png", "webp"];
 
   function handleChange(event) {
@@ -83,16 +84,8 @@ let selectedImages = [];
   };
 
   const downloadImage = () => {
-   const a = document.createElement('a');
-   a.href = resizedImages;
-   console.log("mansih");
-   console.log(resizedImages);
-   a.download = 'resized_image.'+selectedFormat; // You can customize the filename here
-   a.style.display = 'none';
 
-   document.body.appendChild(a);
-   a.click();
-   document.body.removeChild(a);
+    
  };
   
         
@@ -100,7 +93,7 @@ let selectedImages = [];
  
 
  
-<input type="file" accept="image/*" multiple on:change={handleImageSelect} />
+<input type="file"  id = "files" accept="image/*" multiple on:change={handleImageSelect} />
  
 <div id="output"></div>
 <!-- for Heading container Box  -->

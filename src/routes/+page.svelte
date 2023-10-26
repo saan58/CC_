@@ -17,7 +17,7 @@
   let state1 = false;
   let isDownload = false;
   let fileSizeKbBefor = 0;
-  let fileSizeKbAfter;
+  let fileSizeKbAfter = 0;
   let backFile = false;
   let downloadButton;
    
@@ -39,9 +39,8 @@
   
     selectedImage.forEach((file, i) => {
       
- console.log(selectedImage.length);
-      console.log("manish file => "+ selectedImage[i].name);
-      console.log("manish file => "+ selectedImage[i].size / 1024);
+ 
+     
       fileSizeKbBefor += (selectedImage[i].size / 1024);
     
     });
@@ -304,15 +303,32 @@
 
   
 
-  function dataURItoBlob(dataURI) {
-      const byteString = atob(dataURI.split(',')[1]);
-      const ab = new ArrayBuffer(byteString.length);
-      const ia = new Uint8Array(ab);
-      for (let i = 0; i < byteString.length; i++) {
-          ia[i] = byteString.charCodeAt(i);
-      }
-      return new Blob([ab], { type: 'image/jpeg' });
-  }
+  
+
+function dataURItoBlob(dataURI) {
+  return new Promise((resolve, reject) => {
+    const byteString = atob(dataURI.split(',')[1]);
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    const fileSizeKb = (byteString.length / 1024).toFixed(1);
+    
+    console.log("bytes => " + fileSizeKb);
+    
+    fileSizeKbAfter += parseFloat(fileSizeKb);
+    console.log("sum => " + fileSizeKbAfter);
+
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+
+    resolve(new Blob([ab], { type: 'image/jpeg' }));
+  });
+}
+
+ 
+
+ 
+
 
 
 
@@ -320,6 +336,8 @@
   const deltetImage = () => {
     imageSelected = true;
     isvlue = false;
+    fileSizeKbAfter = 0;
+    fileSizeKbBefor = 0;
     
   };
 
@@ -327,17 +345,22 @@
     imageSelected = true;
     isvlue = false;
     backFile = true;
+    fileSizeKbAfter = 0;
+    fileSizeKbBefor = 0;
   }
 
   // ==========on back press =============
   const BackPage = () => {
     isvlue = true;
     isDownload = false;
+    fileSizeKbAfter = 0 ;
      
   };
 
   const deleteFile = ()=> {
     backFile = false;
+    fileSizeKbAfter = 0;
+    fileSizeKbBefor = 0;
   }
 
 </script>
@@ -883,6 +906,7 @@
 
       <div>
         <div class="after">After</div>
+        <div >{fileSizeKbAfter.toFixed(1)}Kb</div>
       </div>
     </div>
     <p class="result">

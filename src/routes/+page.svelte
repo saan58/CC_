@@ -378,16 +378,17 @@ function dataURItoBlob(dataURI) {
       <!-- for get a padding  -->
       <br /><br />
       {#if backFile }
-      <h3 class = "h2">Select File({selectedImage.length})</h3>
+      <h3 class = "h2">Select File({selectedImage.length})   <button class="deleteFile" on:click={deleteFile}>Delete</button></h3>
       
        
       {#each selectedImage as file }
       <div class="backshowfile">
         <p class="fileName">{file.name}</p>
         <p class="filekb">{(file.size/1024).toFixed(1)} Kb</p>
-        <button class="deleteFile" on:click={deleteFile}>Delete</button>
+        
       </div>
     {/each}
+    
 
       {/if}
     

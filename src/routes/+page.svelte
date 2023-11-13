@@ -20,7 +20,7 @@
   let fileSizeKbAfter = 0;
   let backFile = false;
   let downloadButton;
-   
+
   const formats = ["jpeg", "png", "webp"];
 
   //====================
@@ -34,25 +34,16 @@
     isvlue = true;
 
     selectedImage = Array.from(event.target.files);
-  
- 
-  
+
     selectedImage.forEach((file, i) => {
-      
- 
-     
-      fileSizeKbBefor += (selectedImage[i].size / 1024);
-    
+      fileSizeKbBefor += selectedImage[i].size / 1024;
     });
-    
-   
   };
 
   //======= Function to switch the active div================
   function switchDiv(divId) {
     activeDiv = divId;
     downloadButton = divId;
-  
   }
   //=========== percenta Function logic =========
 
@@ -61,14 +52,13 @@
     isvlue = false;
 
     if (selectedImage.length === 0) {
-          return;
-      }
-      let zip = new JSZip();
+      return;
+    }
+    let zip = new JSZip();
 
+    selectedImage.forEach((file, i) => {
+      console.log("i value " + i + "file" + file);
 
-      selectedImage.forEach((file, i) => {
-        console.log('i value '+ i + "file"+file);
-    
       const reader = new FileReader();
       reader.onload = () => {
         const img = new Image();
@@ -81,26 +71,27 @@
           canvas.height = img.height * scaleFactor;
           const ctx = canvas.getContext("2d");
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-         const resizedImage = canvas.toDataURL(
+          const resizedImage = canvas.toDataURL(
             "image/jpeg",
             imageQuality / 100
           );
 
-          zip.file(`resized_image_${i}.`+selectedFormat, dataURItoBlob(resizedImage));
-          
-          if (i === selectedImage.length -1) {
-                    console.log("manis"+selectedImage.length);
-                      zip.generateAsync({ type: 'blob' }).then((content) => {
-                          saveAs(content, "bulk_resize_.zip");
-                      });
-                  }
-          
+          zip.file(
+            `resized_image_${i}.` + selectedFormat,
+            dataURItoBlob(resizedImage)
+          );
+
+          if (i === selectedImage.length - 1) {
+            console.log("manis" + selectedImage.length);
+            zip.generateAsync({ type: "blob" }).then((content) => {
+              saveAs(content, "bulk_resize_.zip");
+            });
+          }
         };
       };
       reader.readAsDataURL(file);
-     
-      });
-    };
+    });
+  };
 
   //=========== Image Dimensions function =========
 
@@ -109,14 +100,13 @@
     isvlue = false;
 
     if (selectedImage.length === 0) {
-          return;
-      }
-      let zip = new JSZip();
+      return;
+    }
+    let zip = new JSZip();
 
+    selectedImage.forEach((file, i) => {
+      console.log("i value " + i + "file" + file);
 
-      selectedImage.forEach((file, i) => {
-        console.log('i value '+ i + "file"+file);
-    
       const reader = new FileReader();
       reader.onload = () => {
         const img = new Image();
@@ -126,29 +116,28 @@
           const scaleFactor = resizeDimensionsWidth / img.width;
           const canvas = document.createElement("canvas");
           canvas.width = resizeDimensionsWidth;
-            canvas.height = resizeDimensionsHeight;
+          canvas.height = resizeDimensionsHeight;
           const ctx = canvas.getContext("2d");
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-         const resizedImage = canvas.toDataURL(
+          const resizedImage = canvas.toDataURL(
             "image/jpeg",
             imageQuality / 100
           );
 
-          zip.file(`resized_image_${i}.`+selectedFormat, dataURItoBlob(resizedImage));
-          if (i === selectedImage.length -1) {
-                    console.log("manis"+selectedImage.length);
-                      zip.generateAsync({ type: 'blob' }).then((content) => {
-                          saveAs(content, "bulk_resize_.zip");
-                      });
-                  }
-          
+          zip.file(
+            `resized_image_${i}.` + selectedFormat,
+            dataURItoBlob(resizedImage)
+          );
+          if (i === selectedImage.length - 1) {
+            console.log("manis" + selectedImage.length);
+            zip.generateAsync({ type: "blob" }).then((content) => {
+              saveAs(content, "bulk_resize_.zip");
+            });
+          }
         };
       };
       reader.readAsDataURL(file);
-     
-      });
-
-    
+    });
   };
 
   //============Width functjion =============
@@ -158,14 +147,13 @@
     isvlue = false;
 
     if (selectedImage.length === 0) {
-          return;
-      }
-      let zip = new JSZip();
+      return;
+    }
+    let zip = new JSZip();
 
+    selectedImage.forEach((file, i) => {
+      console.log("i value " + i + "file" + file);
 
-      selectedImage.forEach((file, i) => {
-        console.log('i value '+ i + "file"+file);
-    
       const reader = new FileReader();
       reader.onload = () => {
         const img = new Image();
@@ -175,28 +163,28 @@
           const scaleFactor = resizeWidth / img.width;
           const canvas = document.createElement("canvas");
           canvas.width = resizeWidth;
-            canvas.height = img.height * scaleFactor;
+          canvas.height = img.height * scaleFactor;
           const ctx = canvas.getContext("2d");
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-         const resizedImage = canvas.toDataURL(
+          const resizedImage = canvas.toDataURL(
             "image/jpeg",
             imageQuality / 100
           );
 
-          zip.file(`resized_image_${i}.`+selectedFormat, dataURItoBlob(resizedImage));
-          if (i === selectedImage.length -1) {
-                    console.log("manis"+selectedImage.length);
-                      zip.generateAsync({ type: 'blob' }).then((content) => {
-                          saveAs(content, "bulk_resize_.zip");
-                      });
-                  }
-          
+          zip.file(
+            `resized_image_${i}.` + selectedFormat,
+            dataURItoBlob(resizedImage)
+          );
+          if (i === selectedImage.length - 1) {
+            console.log("manis" + selectedImage.length);
+            zip.generateAsync({ type: "blob" }).then((content) => {
+              saveAs(content, "bulk_resize_.zip");
+            });
+          }
         };
       };
       reader.readAsDataURL(file);
-     
-      });
-   
+    });
   };
 
   //================Height Function=============
@@ -205,16 +193,14 @@
     isDownload = true;
     isvlue = false;
 
-   
     if (selectedImage.length === 0) {
-          return;
-      }
-      let zip = new JSZip();
+      return;
+    }
+    let zip = new JSZip();
 
+    selectedImage.forEach((file, i) => {
+      console.log("i value " + i + "file" + file);
 
-      selectedImage.forEach((file, i) => {
-        console.log('i value '+ i + "file"+file);
-    
       const reader = new FileReader();
       reader.onload = () => {
         const img = new Image();
@@ -224,27 +210,28 @@
           const scaleFactor = resizeHeight / img.height;
           const canvas = document.createElement("canvas");
           canvas.width = img.width * scaleFactor;
-            canvas.height = resizeHeight;
+          canvas.height = resizeHeight;
           const ctx = canvas.getContext("2d");
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-         const resizedImage = canvas.toDataURL(
+          const resizedImage = canvas.toDataURL(
             "image/jpeg",
             imageQuality / 100
           );
 
-          zip.file(`resized_image_${i}.`+selectedFormat, dataURItoBlob(resizedImage));
-          if (i === selectedImage.length -1) {
-                    console.log("manis"+selectedImage.length);
-                      zip.generateAsync({ type: 'blob' }).then((content) => {
-                          saveAs(content, "bulk_resize_.zip");
-                      });
-                  }
-          
+          zip.file(
+            `resized_image_${i}.` + selectedFormat,
+            dataURItoBlob(resizedImage)
+          );
+          if (i === selectedImage.length - 1) {
+            console.log("manis" + selectedImage.length);
+            zip.generateAsync({ type: "blob" }).then((content) => {
+              saveAs(content, "bulk_resize_.zip");
+            });
+          }
         };
       };
       reader.readAsDataURL(file);
-     
-      });
+    });
   };
 
   // ===========longest Side function ===========
@@ -253,14 +240,13 @@
     isvlue = false;
 
     if (selectedImage.length === 0) {
-          return;
-      }
-      let zip = new JSZip();
+      return;
+    }
+    let zip = new JSZip();
 
+    selectedImage.forEach((file, i) => {
+      console.log("i value " + i + "file" + file);
 
-      selectedImage.forEach((file, i) => {
-        console.log('i value '+ i + "file"+file);
-    
       const reader = new FileReader();
       reader.onload = () => {
         const img = new Image();
@@ -268,100 +254,88 @@
 
         img.onload = () => {
           const scaleFactorW = resizeLongSide / img.width;
-            const scaleFactorH = resizeLongSide / img.height;
+          const scaleFactorH = resizeLongSide / img.height;
           const canvas = document.createElement("canvas");
-         
+
           if (img.width > img.height) {
-              canvas.width = resizeLongSide;
-              canvas.height = scaleFactorW * img.height;
-            } else {
-              canvas.height = resizeLongSide;
-              canvas.width = scaleFactorH * img.width;
-            }
+            canvas.width = resizeLongSide;
+            canvas.height = scaleFactorW * img.height;
+          } else {
+            canvas.height = resizeLongSide;
+            canvas.width = scaleFactorH * img.width;
+          }
 
           const ctx = canvas.getContext("2d");
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-         const resizedImage = canvas.toDataURL(
+          const resizedImage = canvas.toDataURL(
             "image/jpeg",
             imageQuality / 100
           );
 
-          zip.file(`resized_image_${i}.`+selectedFormat, dataURItoBlob(resizedImage));
-          if (i === selectedImage.length -1) {
-                    console.log("manis"+selectedImage.length);
-                      zip.generateAsync({ type: 'blob' }).then((content) => {
-                          saveAs(content, "bulk_resize_.zip");
-                      });
-                  }
-          
+          zip.file(
+            `resized_image_${i}.` + selectedFormat,
+            dataURItoBlob(resizedImage)
+          );
+          if (i === selectedImage.length - 1) {
+            console.log("manis" + selectedImage.length);
+            zip.generateAsync({ type: "blob" }).then((content) => {
+              saveAs(content, "bulk_resize_.zip");
+            });
+          }
         };
       };
       reader.readAsDataURL(file);
-     
-      });
+    });
   };
 
-  
+  function dataURItoBlob(dataURI) {
+    return new Promise((resolve, reject) => {
+      const byteString = atob(dataURI.split(",")[1]);
+      const ab = new ArrayBuffer(byteString.length);
+      const ia = new Uint8Array(ab);
+      const fileSizeKb = (byteString.length / 1024).toFixed(1);
 
-  
+      console.log("bytes => " + fileSizeKb);
 
-function dataURItoBlob(dataURI) {
-  return new Promise((resolve, reject) => {
-    const byteString = atob(dataURI.split(',')[1]);
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-    const fileSizeKb = (byteString.length / 1024).toFixed(1);
-    
-    console.log("bytes => " + fileSizeKb);
-    
-    fileSizeKbAfter += parseFloat(fileSizeKb);
-    console.log("sum => " + fileSizeKbAfter);
+      fileSizeKbAfter += parseFloat(fileSizeKb);
+      console.log("sum => " + fileSizeKbAfter);
 
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-    }
+      for (let i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
 
-    resolve(new Blob([ab], { type: 'image/jpeg' }));
-  });
-}
+      resolve(new Blob([ab], { type: "image/jpeg" }));
+    });
+  }
 
- 
-
-
-
-   
   // ========on delete item======
   const deltetImage = () => {
     imageSelected = true;
     isvlue = false;
     fileSizeKbAfter = 0;
     fileSizeKbBefor = 0;
-    
   };
-  
 
-   const backMenu =()=>{
+  const backMenu = () => {
     imageSelected = true;
     isvlue = false;
     backFile = true;
     fileSizeKbAfter = 0;
     fileSizeKbBefor = 0;
-  }
+  };
 
   // ==========on back press =============
   const BackPage = () => {
     isvlue = true;
     isDownload = false;
-    fileSizeKbAfter = 0 ;
-     
+    fileSizeKbAfter = 0;
   };
 
-  const deleteFile = ()=> {
+  const deleteFile = () => {
     backFile = false;
     fileSizeKbAfter = 0;
     fileSizeKbBefor = 0;
-  }
-
+  };
 </script>
 
 {#if imageSelected}
@@ -376,31 +350,27 @@ function dataURItoBlob(dataURI) {
 
       <!-- for get a padding  -->
       <br /><br />
-      {#if backFile }
-      <h3 class = "h2">Select File({selectedImage.length})   <button class="deleteFile" on:click={deleteFile}>Delete</button></h3>
-      
-       
-      {#each selectedImage as file }
-      <div class="backshowfile">
-        <p class="fileName">{file.name}</p>
-        <p class="filekb">{(file.size/1024).toFixed(1)} Kb</p>
-        
-      </div>
-    {/each}
-    
+      {#if backFile}
+        <h3 class="h2">
+          Select File({selectedImage.length})
+          <button class="deleteFile" on:click={deleteFile}>Delete</button>
+        </h3>
 
+        {#each selectedImage as file}
+          <div class="backshowfile">
+            <p class="fileName">{file.name}</p>
+            <p class="filekb">{(file.size / 1024).toFixed(1)} Kb</p>
+          </div>
+        {/each}
       {/if}
-    
+
       <br /><br />
       <br /><br />
-
-       
-
 
       <!-- Drop image here or image choose  -->
       <div class="drop_image">
         <p>Drop images here <br /> or</p>
- 
+
         <div>
           <input
             class=" chooseImage"
@@ -869,35 +839,35 @@ function dataURItoBlob(dataURI) {
     <div class="complete">Completed</div>
 
     {#if activeDiv == "Percentage"}
-    <button type="button" class="download" on:click={percentaFunction}
-    >Download
-  </button>
+      <button type="button" class="download" on:click={percentaFunction}
+        >Download
+      </button>
     {/if}
 
     {#if activeDiv == "ImageDimensions"}
-    <button type="button" class="download" on:click={imageDimFunctioin}
-    >Download
-  </button>
+      <button type="button" class="download" on:click={imageDimFunctioin}
+        >Download
+      </button>
     {/if}
 
     {#if activeDiv == "WidthDiv"}
-    <button type="button" class="download" on:click={widthFunction}
-    >Download
-  </button>
+      <button type="button" class="download" on:click={widthFunction}
+        >Download
+      </button>
     {/if}
 
     {#if activeDiv == "HeightDiv"}
-    <button type="button" class="download" on:click={heightFunction}
-    >Download
-  </button>
+      <button type="button" class="download" on:click={heightFunction}
+        >Download
+      </button>
     {/if}
 
     {#if activeDiv == "LongestSide"}
-    <button type="button" class="download" on:click={longSideFunction}
-    >Download
-  </button>
+      <button type="button" class="download" on:click={longSideFunction}
+        >Download
+      </button>
     {/if}
-   
+
     <div class="rowdown">
       <div>
         <div class="before">Before</div>
@@ -906,7 +876,7 @@ function dataURItoBlob(dataURI) {
 
       <div>
         <div class="after">After</div>
-        <div >{fileSizeKbAfter.toFixed(1)}Kb</div>
+        <div>{fileSizeKbAfter.toFixed(1)}Kb</div>
       </div>
     </div>
     <p class="result">
@@ -927,7 +897,6 @@ function dataURItoBlob(dataURI) {
     width: 100%;
   }
 
- 
   h2 {
     font-size: 30px;
   }
@@ -944,7 +913,7 @@ function dataURItoBlob(dataURI) {
     align-content: center;
     justify-content: center;
     align-items: center;
-    
+
     font-size: 28px;
     padding-top: 1%;
   }
@@ -975,7 +944,7 @@ function dataURItoBlob(dataURI) {
     height: 35px;
     width: 100%;
     font-size: 20px;
-    
+
     color: white;
     font-weight: 700;
     margin-top: 70px;
@@ -1043,8 +1012,7 @@ function dataURItoBlob(dataURI) {
   .p2 {
     font-size: 20px;
     margin-left: 30px;
-   margin-top: 30px;
-    
+    margin-top: 30px;
   }
   .p3 {
     font-size: 20px;
@@ -1104,12 +1072,12 @@ function dataURItoBlob(dataURI) {
     /* object-fit: ; */
     font-size: 20px;
   }
-   /* heading Style */
-   .Heading_container1 {
+  /* heading Style */
+  .Heading_container1 {
     /* border: 2px solid red; */
     height: 40px;
-    width:250px;
-margin-bottom: 50px;
+    width: 250px;
+    margin-bottom: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1123,9 +1091,8 @@ margin-bottom: 50px;
   }
 
   .percentage {
-    padding-left:80px;
+    padding-left: 80px;
     font-size: 25px;
-                        
   }
 
   .Choose_file1 {
@@ -1197,7 +1164,7 @@ margin-bottom: 50px;
   ul {
     margin: 0;
     padding: 0;
-  
+
     width: 200px;
   }
 
@@ -1289,11 +1256,10 @@ margin-bottom: 50px;
     margin-top: 20px;
   }
 
-  .h2{
+  .h2 {
     margin-right: 900px;
-    
   }
-  .backshowfile{
+  .backshowfile {
     width: 1000px;
     height: 40px;
     display: inline-flex;
@@ -1302,13 +1268,13 @@ margin-bottom: 50px;
     justify-content: center;
     border-radius: 5px;
   }
-  .fileName{
+  .fileName {
     margin-right: 400px;
   }
-  .filekb{
+  .filekb {
     margin-right: 300px;
   }
-  .deleteFile{
+  .deleteFile {
     width: 80px;
     height: 25px;
     background-color: red;
@@ -1317,7 +1283,5 @@ margin-bottom: 50px;
     align-items: center;
     justify-content: center;
     display: flex;
-    
   }
-  
 </style>

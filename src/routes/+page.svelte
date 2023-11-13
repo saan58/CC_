@@ -327,11 +327,9 @@ function dataURItoBlob(dataURI) {
 
  
 
- 
 
 
-
-
+   
   // ========on delete item======
   const deltetImage = () => {
     imageSelected = true;
@@ -340,8 +338,9 @@ function dataURItoBlob(dataURI) {
     fileSizeKbBefor = 0;
     
   };
+  
 
-  const backMenu =()=>{
+   const backMenu =()=>{
     imageSelected = true;
     isvlue = false;
     backFile = true;

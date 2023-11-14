@@ -1,38 +1,75 @@
-# create-svelte
+ 
+# Image Bulk Resize Tool with Svelte
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+A simple tool for resizing multiple images in bulk using Svelte.
 
-## Creating a project
 
-If you're seeing this, you've probably already done this step. Congrats!
+![first](https://github.com/Manishs2261/Bulk_Image_resize/assets/122163664/480c280c-252b-45bc-b491-d6d668715fa8)
+![second](https://github.com/Manishs2261/Bulk_Image_resize/assets/122163664/b0c624ee-e98d-4109-9854-c03a9c199b3d)
+![third](https://github.com/Manishs2261/Bulk_Image_resize/assets/122163664/4de2da43-5628-4c5f-b0de-5a425bdfca4b)
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+ 
+ 
+## Table of Contents
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+- [Introduction](#introduction)
+- [Features](#features)
+- [Getting Started](#getting-started)
+  - [Installation](#installation)
+  - [Usage](#usage)
+- [Contributing](#contributing)
 
-## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
-```bash
-npm run dev
+## Introduction
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+This tool is a lightweight application built with Svelte for efficiently resizing multiple images in bulk. It provides a user-friendly interface for quick and hassle-free image processing.
 
-## Building
+## Features
 
-To create a production version of your app:
+- **Bulk Resize:** Resize multiple images simultaneously.
+- **User-Friendly Interface:** Simple and intuitive UI for easy navigation.
 
-```bash
-npm run build
-```
+## Getting Started
 
-You can preview the production build with `npm run preview`.
+### Installation
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+To use this tool, follow these steps:
+
+1. Clone the project Svelte app:
+
+    ```bash
+    https://github.com/Manishs2261/Bulk_Image_resize.git
+    ```
+
+2. Navigate to the project directory:
+
+    ```bash
+    cd Bulk_Image_resize
+    ```
+
+3. Install dependencies:
+
+    ```bash
+    npm install
+    ```
+
+### Usage
+
+1. Launch the development server and open the app in your default browser:
+
+    ```bash
+    npm run dev -- --open
+    ```
+
+2. Use the provided interface to select and resize your images.
+
+ 
+
+## Contributing
+
+If you'd like to contribute to this project, please follow these guidelines:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and submit a pull request.

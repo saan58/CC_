@@ -17,5 +17,8 @@
     "dependencies": {
         "jszip": "^3.10.1",
         "pica": "^9.0.1"
+    },
+    "engines": {
+        "node": ">=16.0.0"
     }
 }
